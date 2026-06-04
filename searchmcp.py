@@ -53,7 +53,7 @@ async def _fetch_html(url: str) -> tuple[str | None, str]:
     """Fetch HTML from a URL. Returns (html, error_type)."""
     try:
         async with httpx.AsyncClient(
-            timeout=httpx.Timeout(connect=CONNECT_TIMEOUT, read=READ_TIMEOUT),
+            timeout=READ_TIMEOUT,
             headers={"User-Agent": USER_AGENT},
             follow_redirects=True,
         ) as client:
@@ -401,7 +401,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="SearchMCP Server")
     parser.add_argument("--log-level", default="WARNING",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR"])
-    parser.add_argument("--port", type=int, default=8012, help="SSE port (default: 8012)")
+    parser.add_argument("--port", type=int, default=8013, help="SSE port (default: 8013)")
     parser.add_argument("--host", default="0.0.0.0", help="Bind host")
     args = parser.parse_args()
     logging.basicConfig(level=getattr(logging, args.log_level), stream=sys.stderr)

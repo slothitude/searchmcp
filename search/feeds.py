@@ -21,7 +21,7 @@ async def read_sitemap(url: str, pattern: str = "", limit: int = 100) -> list[st
     4. If still nothing, try {root}/feed and {root}/rss
     """
     async with httpx.AsyncClient(
-        timeout=httpx.Timeout(CONNECT_TIMEOUT, read=15.0),
+        timeout=15.0,
         headers={"User-Agent": USER_AGENT},
         follow_redirects=True,
     ) as client:
